@@ -1,14 +1,14 @@
-FROM mcr.microsoft.com/windows:latest
+FROM ubuntu:latest
 
-RUN powershell -Command \
-    Install-Package -Name python3.10 -Force ; \
-    Install-Package -Name python3-pip -Force ; \
-    Install-Package -Name git -Force
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip \
+    git add 
 
-RUN pip install PyYAML
+RUN pip3 install PyYAML
 
-COPY feed.py C:\urs\bin\feed.py
+COPY feed.py /urs/bin/feed.py
 
-COPY entrypoint.sh C:\entrypoint.sh
+COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["C:\\entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
